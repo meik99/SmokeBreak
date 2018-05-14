@@ -1,3 +1,5 @@
+package com.rynkbit.game;
+
 import java.awt.*;
 
 public interface GameObject {

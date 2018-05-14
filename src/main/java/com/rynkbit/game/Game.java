@@ -1,3 +1,5 @@
+package com.rynkbit.game;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +9,7 @@ public class Game extends JFrame {
         this.add(new GameCanvas());
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setBounds(0, 0, 400, 400);
+        this.setBounds(0, 0, 800, 600);
         this.setVisible(true);
     }
 }
