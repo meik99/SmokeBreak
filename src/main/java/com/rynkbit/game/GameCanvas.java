@@ -6,48 +6,59 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class GameCanvas extends Canvas implements ActionListener{
-    private final List<Brick> bricks;
+public class GameCanvas extends JPanel implements ActionListener{
+    private final List<Brick> bricks = new ArrayList<>();
     private final Ball ball;
     private final Paddel paddel;
     private final Timer gameTimer;
+    private final Game game;
+
+    private Image offscreenImage;
+    private Graphics offscreenGraphics;
 
     public GameCanvas(Game game) {
-        bricks = new ImageAnalyzer().analyze();
         ball = new Ball();
         paddel = new Paddel();
-        gameTimer = new Timer(1000 / 60, this);
+        gameTimer = new Timer(10, this);
+        this.game = game;
 
-        this.addKeyListener(ball);
-        this.addKeyListener(paddel);
-        this.requestFocus();
+        add(ball);
+        add(paddel);
+
+        setBackground(Color.BLACK);
+
+        game.addKeyListener(ball);
+        game.addKeyListener(paddel);
+        game.requestFocus();
+
         gameTimer.start();
     }
 
     @Override
     public void paint(Graphics g) {
-        BufferedImage bufferedImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics graphics = bufferedImage.getGraphics();
+        if(bricks.size() == 0){
+            bricks.addAll(new ImageAnalyzer(getBounds()).analyze());
+        }
 
-        graphics.setColor(Color.WHITE);
+        offscreenImage = createImage(getWidth(), getHeight());
 
-        graphics.clearRect(0, 0, getWidth(), getHeight());
-
-        graphics.setColor(Color.BLACK);
-        g.setColor(Color.BLACK);
+        offscreenGraphics = offscreenImage.getGraphics();
+        offscreenGraphics.setColor(Color.BLACK);
+        offscreenGraphics.fillRect(0, 0, getWidth(), getHeight());
 
         for (Brick brick :
                 bricks) {
-            brick.draw(graphics);
+            brick.draw(offscreenGraphics);
         }
-        ball.paint(graphics);
-        paddel.paintBase(graphics);
 
-        g.drawImage(bufferedImage, 0, 0, getWidth(), getHeight(), null);
+        ball.paint(offscreenGraphics);
+        paddel.paintBase(offscreenGraphics);
+
+        g.drawImage(offscreenImage, 0, 0, null);
     }
 
     @Override
@@ -63,11 +74,22 @@ public class GameCanvas extends Canvas implements ActionListener{
             if(ball.getBounds().intersects(brick.getBounds())){
                 bricksToRemove.add(brick);
             }
+            if(Arrays.stream(brick.getYBounds())
+                    .anyMatch(bound -> bound.intersects(ball.getBounds()))){
+                ball.changeYDirection();
+            }
+            if(Arrays.stream(brick.getXBounds())
+                    .anyMatch(bound -> bound.intersects(ball.getBounds()))){
+                ball.changeXDirection();
+            }
         }
 
+        if(ball.getBounds().intersects(paddel.getBounds())){
+            ball.changeYDirection();
+        }
+
+
         bricks.removeAll(bricksToRemove);
-
-
         repaint();
     }
 }

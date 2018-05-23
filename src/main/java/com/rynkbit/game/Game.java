@@ -9,7 +9,7 @@ public class Game extends JFrame {
         this.add(new GameCanvas(this));
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setBounds(0, 0, 800, 600);
+        this.setBounds(0, 0, 1200, 1200);
         this.setVisible(true);
     }
 }

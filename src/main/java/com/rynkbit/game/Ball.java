@@ -2,13 +2,13 @@ package com.rynkbit.game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Ball extends JPanel implements KeyListener {
 
+    public static final int WIDTH = 32;
+    public static final int HEIGHT = 32;
     private boolean play = false;
     private int playerX = 400;
     private int ballposX = 120;
@@ -21,18 +21,10 @@ public class Ball extends JPanel implements KeyListener {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(ballposX, ballposY, 32, 32);
+        return new Rectangle(ballposX, ballposY, WIDTH, HEIGHT);
     }
 
     public void update() {
-        //direction of ball --> when base touched
-        if(play) {
-            if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 550, 100, 15))) {
-                ballYdir = -ballYdir;
-            }
-        }
-
-
         //direction of ball --> when borders touched
         if(play) { //left or right key pressed
             ballposX += ballXdir;
@@ -41,24 +33,27 @@ public class Ball extends JPanel implements KeyListener {
                 ballXdir = -ballXdir;
             }
             if(ballposY <  0) {
-                ballYdir = -ballYdir;
+                changeYDirection();
             }
-            if(ballposX > 670) {
+            if(ballposX + WIDTH > getParent().getWidth()) {
                 ballXdir = -ballXdir;
             }
         }
     }
 
+    public void changeYDirection() {
+        ballYdir = -ballYdir;
+    }
+
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillOval(ballposX, ballposY, 32, 32);
+        g.fillOval(ballposX, ballposY, WIDTH, HEIGHT);
     }
 
     @Override
     public void keyPressed(KeyEvent arg0) {
         play = true;
-
     }
 
     @Override
@@ -67,4 +62,7 @@ public class Ball extends JPanel implements KeyListener {
     @Override
     public void keyTyped(KeyEvent arg0) {}
 
+    public void changeXDirection() {
+        ballXdir = -ballXdir;
+    }
 }

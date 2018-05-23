@@ -33,8 +33,26 @@ public class Brick {
         return new Rectangle(brickX, brickY, BRICK_WIDTH, BRICK_HEIGHT);
     }
 
+    public Rectangle[] getXBounds(){
+        Rectangle[] bounds = new Rectangle[2];
+
+        bounds[0] = new Rectangle(brickX, brickY, 1, Brick.BRICK_HEIGHT);
+        bounds[1] = new Rectangle(brickX + Brick.BRICK_WIDTH - 1, brickY, 1, Brick.BRICK_HEIGHT);
+
+        return bounds;
+    }
+
+    public Rectangle[] getYBounds(){
+        Rectangle[] bounds = new Rectangle[2];
+
+        bounds[0] = new Rectangle(brickX + BRICK_WIDTH / 3, brickY, Brick.BRICK_WIDTH / 3, 1);
+        bounds[1] = new Rectangle(brickX + BRICK_WIDTH / 3, brickY + Brick.BRICK_HEIGHT - 1, Brick.BRICK_WIDTH / 3, 1);
+
+        return bounds;
+    }
+
     public void draw(Graphics g) {
-        g.setColor(Color.RED);
+        g.setColor(Color.WHITE);
         g.fillRect(brickX, brickY, BRICK_WIDTH, BRICK_HEIGHT);
 
 //        g.setColor(Color.BLACK);
