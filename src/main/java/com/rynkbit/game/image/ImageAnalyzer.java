@@ -1,5 +1,7 @@
 package com.rynkbit.game.image;
 
+import com.rynkbit.game.Brick;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -28,19 +30,19 @@ public class ImageAnalyzer {
         return null;
     }
 
-    public List<BlockMock> analyze(){
-        List<BlockMock> blocks = new ArrayList<>();
+    public List<Brick> analyze(){
+        List<Brick> bricks = new ArrayList<>();
         BufferedImage image = load();
 
         for(int y = 0; y < image.getHeight(); y+=BLOCK_HEIGHT){
             for (int x = 0; x < image.getWidth(); x+=BLOCK_WIDTH){
                 if(countBlackPixels(image, y, x) < (BLOCK_WIDTH * BLOCK_HEIGHT) / 2){
-                    blocks.add(new BlockMock(x, y, BLOCK_WIDTH / 2, BLOCK_HEIGHT / 2));
+                    bricks.add(new Brick(x, y));
                 }
             }
         }
 
-        return blocks;
+        return bricks;
     }
 
     private int countBlackPixels(BufferedImage image, int y, int x) {

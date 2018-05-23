@@ -9,5 +9,8 @@
         <module name="smokebreak" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="smokebreak" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
