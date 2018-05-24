@@ -10,11 +10,10 @@ public class Ball extends JPanel implements KeyListener {
     public static final int WIDTH = 32;
     public static final int HEIGHT = 32;
     private boolean play = false;
-    private int playerX = 400;
     private int ballposX = 120;
     private int ballposY = 400;
-    private int ballXdir = -1;
-    private int ballYdir = -2;
+    private int ballXdir = -2;
+    private int ballYdir = -4;
 
     public Ball() {
     }
@@ -25,18 +24,18 @@ public class Ball extends JPanel implements KeyListener {
     }
 
     public void update() {
-        //direction of ball --> when borders touched
-        if(play) { //left or right key pressed
+        if(play) {
             ballposX += ballXdir;
             ballposY += ballYdir;
+
             if(ballposX <  0) {
-                ballXdir = -ballXdir;
+                changeXDirection();
+            }
+            if(ballposX + WIDTH > getParent().getWidth()) {
+                changeXDirection();
             }
             if(ballposY <  0) {
                 changeYDirection();
-            }
-            if(ballposX + WIDTH > getParent().getWidth()) {
-                ballXdir = -ballXdir;
             }
         }
     }

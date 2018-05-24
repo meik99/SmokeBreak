@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Paddel extends JPanel implements KeyListener {
+public class Paddle extends JPanel implements KeyListener {
     private int playerX = 400;
     private final int WIDTH = 100;
     private final int HEIGHT = 15;
