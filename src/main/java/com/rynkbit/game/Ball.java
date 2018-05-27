@@ -15,7 +15,9 @@ public class Ball extends JPanel implements KeyListener {
     private int ballXdir = -2;
     private int ballYdir = -4;
 
-    public Ball() {
+    public Ball(Paddle paddle) {
+        ballposY = paddle.getY() + 10 + HEIGHT;
+        ballposX = paddle.getX() + paddle.getWidth() / 2;
     }
 
     @Override
