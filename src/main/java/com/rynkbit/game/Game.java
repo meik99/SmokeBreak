@@ -16,6 +16,10 @@ public class Game extends JFrame implements ActionListener {
 
     private Scene currentScene;
 
+    /**
+     * Creates a game window and starts update cycle
+     * @throws HeadlessException
+     */
     public Game() throws HeadlessException {
         this.setLayout(new GridLayout(1, 1));
         this.setBackground(Color.BLACK);
@@ -32,6 +36,10 @@ public class Game extends JFrame implements ActionListener {
         gameTimer.start();
     }
 
+    /**
+     * Updates current scene and restarts update-cycle-timer
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         currentScene.update();
@@ -39,19 +47,34 @@ public class Game extends JFrame implements ActionListener {
         repaint();
     }
 
+    /**
+     * Clears screen and draws the current scene to the
+     * it.
+     * @param g
+     */
     @Override
     public void paint(Graphics g) {
+        //Create Image the size of the game-window
         offscreenImage = createImage(getWidth(), getHeight());
 
+        //Set graphics to be used to the images graphics object
         offscreenGraphics = offscreenImage.getGraphics();
+
+        //Draws a black background to clears the screen
         offscreenGraphics.setColor(Color.BLACK);
         offscreenGraphics.fillRect(0, 0, getWidth(), getHeight());
 
+        //Calling the current scenes paint method with the images graphics object
         currentScene.paint(offscreenGraphics);
 
+        //Draws the resulting image to the JFrames Graphics object
         g.drawImage(offscreenImage, 0, 0, null);
     }
 
+    /**
+     * Changes the current scene to the given one.
+     * @param scene New scene to be drawn
+     */
     public void changeScene(Scene scene) {
         remove(currentScene);
         add(scene);

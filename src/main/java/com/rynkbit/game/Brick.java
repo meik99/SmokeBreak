@@ -29,10 +29,19 @@ public class Brick {
         brickY = y;
     }
 
+    /**
+     * Returns the area the is used by the brick as a Rectangle
+     * @return A rectangle with the x and y coordinate and width and height
+     * of the brick
+     */
     public Rectangle getBounds(){
         return new Rectangle(brickX, brickY, BRICK_WIDTH, BRICK_HEIGHT);
     }
 
+    /**
+     * Creates bounding rectangles on the left and right sides of the brick
+     * @return An array of rectangles representing those bounding rectangles
+     */
     public Rectangle[] getXBounds(){
         Rectangle[] bounds = new Rectangle[2];
 
@@ -42,6 +51,10 @@ public class Brick {
         return bounds;
     }
 
+    /**
+     * Creates bounding rectangles on the top and bottom sides of the brick
+     * @return An array of rectangles representing those bounding rectangles
+     */
     public Rectangle[] getYBounds(){
         Rectangle[] bounds = new Rectangle[2];
 

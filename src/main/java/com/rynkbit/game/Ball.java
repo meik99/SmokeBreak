@@ -28,12 +28,15 @@ public class Ball extends JPanel implements KeyListener {
             ballposX += ballXdir;
             ballposY += ballYdir;
 
+            //If ball hits the left side of the games window
             if(ballposX <  0) {
                 changeXDirection();
             }
+            //If ball hits the right side of the games window
             if(ballposX + WIDTH > getParent().getWidth()) {
                 changeXDirection();
             }
+            //If ball hits the upper side of the window
             if(ballposY <  0) {
                 changeYDirection();
             }

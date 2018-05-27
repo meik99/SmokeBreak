@@ -17,6 +17,10 @@ public class MainMenu extends Scene implements MouseListener {
     private final Button btnExit;
 
 
+    /**
+     * Creates a new main menu scene
+     * @param game
+     */
     public MainMenu(Game game) {
         this.game = game;
         btnStart = new Button("Start", 0, 0, (int) (50 * TEXT_SIZE), 48);
@@ -25,6 +29,9 @@ public class MainMenu extends Scene implements MouseListener {
         game.addMouseListener(this);
     }
 
+    /**
+     * Set buttons to the middle of the screen
+     */
     @Override
     public void update() {
         btnStart.setX(getBounds().width / 2 - btnStart.getWidth() / 2);
@@ -39,25 +46,28 @@ public class MainMenu extends Scene implements MouseListener {
         Font defaultFont = g.getFont();
         int titleWidth;
         int titleHeight;
-        int textWidth;
         int textHeight;
 
         g.setFont(defaultFont.deriveFont(defaultFont.getSize() * TITLE_SIZE));
 
+        //Get width and height of the title string
         titleWidth = g.getFontMetrics().stringWidth(TITLE);
         titleHeight = (int) g.getFontMetrics().getStringBounds(TITLE, g).getHeight();
 
+        //Drawing title string to the top-center of the screen
         g.setColor(Color.WHITE);
         g.drawString(TITLE, game.getBounds().width / 2 - titleWidth / 2, titleHeight + 10);
 
         g.setFont(defaultFont.deriveFont(defaultFont.getSize() * TEXT_SIZE));
 
-        textWidth = g.getFontMetrics().stringWidth(btnStart.getText());
+        //Calculating height of the btnStart-text string.
+        //Calculating height of the btnExit-text string not necessary, they have the same height.
         textHeight = (int) g.getFontMetrics().getStringBounds(btnStart.getText(), g).getHeight();
 
         btnStart.setHeight(textHeight + 10);
         btnExit.setHeight(textHeight + 10);
 
+        //Drawing buttons and button-text
         g.drawRect(btnStart.getX(), btnStart.getY(), btnStart.getWidth(), btnStart.getHeight());
         g.drawRect(btnExit.getX(), btnExit.getY(), btnExit.getWidth(), btnExit.getHeight());
 
