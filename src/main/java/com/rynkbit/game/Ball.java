@@ -16,6 +16,7 @@ public class Ball extends JPanel implements KeyListener {
     private int ballYdir = -4;
 
     public Ball() {
+
     }
 
     @Override
@@ -66,5 +67,10 @@ public class Ball extends JPanel implements KeyListener {
 
     public void changeXDirection() {
         ballXdir = -ballXdir;
+    }
+
+    public void setToPaddle(Paddle paddle) {
+        ballposX = paddle.getX() + paddle.getWidth() / 2 - WIDTH / 2;
+        ballposY = paddle.getY() - HEIGHT;
     }
 }

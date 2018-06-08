@@ -16,6 +16,7 @@ public class GameScene extends Scene{
     private final Ball ball;
     private final Paddle paddle;
     private final Game game;
+    private boolean paddleSet;
 
 
     public GameScene(Game game) {
@@ -35,6 +36,7 @@ public class GameScene extends Scene{
     public void update() {
         final List<Brick> bricksToRemove = new ArrayList<>();
         ball.update();
+        paddle.update();
 
 
         for (Brick brick :
@@ -76,5 +78,10 @@ public class GameScene extends Scene{
 
         ball.paint(g);
         paddle.paintBase(g);
+
+        if(paddleSet == false){
+            paddleSet = true;
+            ball.setToPaddle(paddle);
+        }
     }
 }

@@ -10,6 +10,8 @@ public class Paddle extends JPanel implements KeyListener {
     private final int WIDTH = 100;
     private final int HEIGHT = 15;
     private int Y = 500;
+    private boolean moveRight = false;
+    private boolean moveLeft = false;
 
     @Override
     public Rectangle getBounds() {
@@ -26,6 +28,25 @@ public class Paddle extends JPanel implements KeyListener {
     }
 
     @Override
+    public int getX() {
+        return playerX;
+    }
+
+    @Override
+    public int getY() {
+        return Y;
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    public int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    @Override
     public void keyTyped(KeyEvent e) {
 
     }
@@ -34,15 +55,32 @@ public class Paddle extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if(e.getKeyChar() == 'A' ||
                 e.getKeyChar() == 'a'){
-            playerX -= 10;
-        }else if(e.getKeyChar() == 'D' ||
+            moveLeft = true;
+        }
+        if(e.getKeyChar() == 'D' ||
                 e.getKeyChar() == 'd'){
+            moveRight = true;
+        }
+    }
+
+    public void update(){
+        if(moveLeft == true) {
+            playerX -= 10;
+        }
+        if(moveRight == true){
             playerX += 10;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if(e.getKeyChar() == 'A' ||
+                e.getKeyChar() == 'a'){
+            moveLeft = false;
+        }
+        if(e.getKeyChar() == 'D' ||
+                e.getKeyChar() == 'd'){
+            moveRight = false;
+        }
     }
 }

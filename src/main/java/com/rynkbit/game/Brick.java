@@ -58,8 +58,8 @@ public class Brick {
     public Rectangle[] getYBounds(){
         Rectangle[] bounds = new Rectangle[2];
 
-        bounds[0] = new Rectangle(brickX + BRICK_WIDTH / 3, brickY, Brick.BRICK_WIDTH / 3, 1);
-        bounds[1] = new Rectangle(brickX + BRICK_WIDTH / 3, brickY + Brick.BRICK_HEIGHT - 1, Brick.BRICK_WIDTH / 3, 1);
+        bounds[0] = new Rectangle(brickX, brickY, Brick.BRICK_WIDTH, 1);
+        bounds[1] = new Rectangle(brickX, brickY + Brick.BRICK_HEIGHT - 1, Brick.BRICK_WIDTH, 1);
 
         return bounds;
     }
