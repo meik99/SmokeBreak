@@ -20,8 +20,8 @@ public class GameScene extends Scene{
 
 
     public GameScene(Game game) {
-        ball = new Ball();
         paddle = new Paddle();
+        ball = new Ball(paddle);
         this.game = game;
 
         add(ball);
