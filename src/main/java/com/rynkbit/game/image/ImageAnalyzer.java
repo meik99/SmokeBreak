@@ -31,7 +31,7 @@ public class ImageAnalyzer {
      */
     private BufferedImage load(){
         try (InputStream inputStream =
-                     getClass().getResourceAsStream("/lung.png")) {
+                     getClass().getResourceAsStream("/kidney.png")) {
             BufferedImage image = ImageIO.read(inputStream);
             int width = (int) (bounds.width * (2.0/3));
             int height = (int) (bounds.height * (1.0/2));
