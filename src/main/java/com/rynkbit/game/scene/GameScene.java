@@ -39,18 +39,19 @@ public class GameScene extends Scene{
         paddle.update();
 
 
-        for (Brick brick :
-                bricks) {
-            if(ball.getBounds().intersects(brick.getBounds())){
+        for (int i = 0; i < bricks.size(); i++) {
+            Brick brick = bricks.get(i);
+            if (ball.getBounds().intersects(brick.getBounds())) {
                 bricksToRemove.add(brick);
-            }
-            if(Arrays.stream(brick.getYBounds())
-                    .anyMatch(bound -> bound.intersects(ball.getBounds()))){
-                ball.changeYDirection();
-            }
-            if(Arrays.stream(brick.getXBounds())
-                    .anyMatch(bound -> bound.intersects(ball.getBounds()))){
-                ball.changeXDirection();
+                if (Arrays.stream(brick.getYBounds())
+                        .anyMatch(bound -> bound.intersects(ball.getBounds()))) {
+                    ball.changeYDirection();
+                }
+                if (Arrays.stream(brick.getXBounds())
+                        .anyMatch(bound -> bound.intersects(ball.getBounds()))) {
+                    ball.changeXDirection();
+                }
+                i = bricks.size();
             }
         }
 
